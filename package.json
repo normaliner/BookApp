@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "BookApp",
   "main": "app.js",
+  "type": "module",
   "scripts": {
-    "live-s": "live-server",
-    "build": "rollup",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "live-server",
+    "build": "rollup -c --watch"
   },
   "repository": {
     "type": "git",
@@ -21,13 +21,13 @@
     "url": "https://github.com/normaliner/BookApp/issues"
   },
   "homepage": "https://github.com/normaliner",
-  "dependencies": {
-    "axios": "^1.6.2"
-  },
   "devDependencies": {
-    "rollup": "^4.9.1"
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "eslint": "^8.56.0",
+    "rollup": "^4.9.1",
+    "rollup-plugin-import-css": "^3.3.5"
   },
-  "peerDependencies": {},
-  "peerDependenciesMeta": {},
-  "optionalDependencies": {}
+  "dependencies": {
+    "on-change": "^5.0.0"
+  }
 }
