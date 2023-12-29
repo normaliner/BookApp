@@ -21,9 +21,13 @@ export class MainView extends AbstactView {
     this.setTitle('Поиск книг');
   }
 
+  destroy() {
+    onChange.unsubscribe(this.appState);
+    onChange.unsubscribe(this.state);
+  }
   appStateHook(path) {
     if (path === 'favorites') {
-      console.log(path);
+      this.render();
     }
   }
 
@@ -35,7 +39,6 @@ export class MainView extends AbstactView {
         this.state.searchQuery,
         this.state.offset
       );
-      console.log(data);
       this.state.numFound = data.numFound;
       this.state.loading = false;
       this.state.list = data.docs;
@@ -54,7 +57,11 @@ export class MainView extends AbstactView {
 
   render() {
     const main = document.createElement('div');
+    main.innerHTML = `
+    <h1>Найдено книг –  ${this.state.numFound}
+    </h1>`;
     main.append(new Search(this.state).render());
+
     main.append(new CardList(this.appState, this.state).render());
     this.app.innerHTML = '';
     this.app.append(main);
