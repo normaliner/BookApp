@@ -23,7 +23,9 @@ export class Search extends DivComponent {
         />
         <img src="/static/search.svg" alt="search"/>
       </div>
-      <button aria-label="Искать" ><img src="/static/search-white.svg" alt="search" /></button>
+      <button aria-label="Искать" >
+      <img src="/static/search-white.svg" alt="search" />
+      </button>
     `;
 
     this.el
@@ -35,7 +37,7 @@ export class Search extends DivComponent {
         this.search();
       }
     });
-    
+
     return this.el;
   }
 }

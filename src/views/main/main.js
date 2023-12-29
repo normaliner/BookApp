@@ -2,10 +2,12 @@ import { AbstactView } from '../../common/view.js';
 import onChange from 'on-change';
 import { Header } from '../../components/header/header.js';
 import { Search } from '../../components/search/search.js';
+import { CardList } from '../../components/card-list/card-list.js';
 
 export class MainView extends AbstactView {
   state = {
     list: [],
+    numFound: 0,
     loading: false,
     searchQuery: undefined,
     offset: 0,
@@ -24,7 +26,7 @@ export class MainView extends AbstactView {
       console.log(path);
     }
   }
-  
+
   async stateHook(path) {
     console.log(path);
     if (path === 'searchQuery') {
@@ -33,9 +35,13 @@ export class MainView extends AbstactView {
         this.state.searchQuery,
         this.state.offset
       );
+      console.log(data);
+      this.state.numFound = data.numFound;
       this.state.loading = false;
       this.state.list = data.docs;
-      console.log(data);
+    }
+    if (path === 'list' || path === 'loading') {
+      this.render();
     }
   }
 
@@ -49,6 +55,7 @@ export class MainView extends AbstactView {
   render() {
     const main = document.createElement('div');
     main.append(new Search(this.state).render());
+    main.append(new CardList(this.appState, this.state).render());
     this.app.innerHTML = '';
     this.app.append(main);
     this.renderHeader();
